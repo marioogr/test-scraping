@@ -1,0 +1,20 @@
+{
+    "asset": "BTC",
+    "values": [
+        {
+            "2021-06-27": {
+                "bit_coin_price": 33080.72,
+                "price_change": 2562.9,
+                "low_24h": 30605.88,
+                "high_24h": 33496.68,
+                "trading_volume": 37367165380.75,
+                "volume": 0.06027,
+                "market_dominance": 47.05,
+                "market_rank": 1.0,
+                "circulating_supply": 18743456.0,
+                "total_supply": 18743456.0,
+                "max_supply": 21000000.0
+            }
+        }
+    ]
+}
