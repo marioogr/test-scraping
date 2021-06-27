@@ -18,8 +18,6 @@ def get_element_text_xpath(driver: webdriver.Chrome ,xpath):
 
     return driver.find_element_by_xpath(xpath).text
 
-print(implicitly_wait)
-
 driver = set_up_driver(implicitly_wait)
 
 driver.get("https://coinmarketcap.com/currencies/bitcoin/")
