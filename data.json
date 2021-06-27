@@ -3,13 +3,13 @@
     "values": [
         {
             "2021-06-27": {
-                "bit_coin_price": 33080.72,
-                "price_change": 2562.9,
+                "bit_coin_price": 32629.19,
+                "price_change": 1695.82,
                 "low_24h": 30605.88,
                 "high_24h": 33496.68,
-                "trading_volume": 37367165380.75,
-                "volume": 0.06027,
-                "market_dominance": 47.05,
+                "trading_volume": 36685594867.1,
+                "volume": 0.05998,
+                "market_dominance": 46.96,
                 "market_rank": 1.0,
                 "circulating_supply": 18743456.0,
                 "total_supply": 18743456.0,
