@@ -14,7 +14,7 @@ Install requirements: `pip install -r requirements.txt`
 
 Run: `python main.py`
 
-Dependiendo de la velocidad de su coneccion a internet, puedes usar el argumento --iw, increasing this value, the browser will wait to load the page without throwing an exception. Example: 
+Depending on the speed of your internet connection, you can use the --iw argument, increasing this value, the browser will wait to load the page without throwing an exception. Example: 
 
 Run: `python main.py --iw=20`
 
