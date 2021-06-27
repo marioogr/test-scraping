@@ -4,14 +4,23 @@ from config import set_up_driver
 from re import sub
 import json
 from datetime import datetime
+from sys import argv
+
+implicitly_wait = 10
+
+if (len(argv) >= 2):
+    arguments = argv[1].split('=')
+    if (arguments[0] == '--iw'):
+        implicitly_wait = int(arguments[1])
 
 def get_element_text_xpath(driver: webdriver.Chrome ,xpath):
     """Return text of element"""
 
     return driver.find_element_by_xpath(xpath).text
 
+print(implicitly_wait)
 
-driver = set_up_driver()
+driver = set_up_driver(implicitly_wait)
 
 driver.get("https://coinmarketcap.com/currencies/bitcoin/")
 
