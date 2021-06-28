@@ -18,7 +18,10 @@ driver = set_up_driver(implicitly_wait)
 
 driver.get("https://coinmarketcap.com/")
 
+date = datetime.now().strftime("%Y-%m-%d")
+
 for asset in assets_querys:
+    #entry point
     driver.find_element_by_xpath(
         asset['entry_point']['xpath']).click()
     driver.refresh()
@@ -32,22 +35,21 @@ for asset in assets_querys:
         asset['buttons']['xpath']['show_more_button']).click()
 
     statistics_querys = asset['statistics']['xpath']
-    date = datetime.now().strftime("%Y-%m-%d")
 
     data = {
         "asset": asset['asset'],
         "values": []
     }
 
-    temp = {}
+    statistics = {}
     for query in statistics_querys:
-        temp[query] = float(sub(regexp,"",get_element_text_xpath(
+        statistics[query] = float(sub(regexp, "", get_element_text_xpath(
                             driver ,statistics_querys[query])))
 
-    data['values'].append({date: temp})
+    data['values'].append({date: statistics})
 
 
-print (dumps(data, indent=4))
+print(dumps(data, indent=4))
 driver.close()
 
 #data to json file
