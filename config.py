@@ -1,6 +1,5 @@
 from selenium import webdriver
 
-
 def set_up_driver(implicitly_wait):
     
     options = webdriver.ChromeOptions()

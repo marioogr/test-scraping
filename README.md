@@ -14,10 +14,6 @@ Install requirements: `pip install -r requirements.txt`
 
 Run: `python main.py`
 
-Depending on the speed of your internet connection, you can use the --iw argument, increasing this value, the browser will wait to load the page without throwing an exception. Example: 
-
-Run: `python main.py --iw=20`
-
 ## Output data
 
 After running the proyect, data.json should be in the folder of this project

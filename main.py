@@ -1,60 +1,56 @@
 from selenium import webdriver
-from querys import querys
+from querys import assets_querys
 from config import set_up_driver
 from re import sub
-import json
+from json import dumps, dump
 from datetime import datetime
-from sys import argv
+from constants import regexp
 
 implicitly_wait = 10
 
-if (len(argv) >= 2):
-    arguments = argv[1].split('=')
-    if (arguments[0] == '--iw'):
-        implicitly_wait = int(arguments[1])
-
-def get_element_text_xpath(driver: webdriver.Chrome ,xpath):
+def get_element_text_xpath(
+        driver: webdriver.Chrome ,xpath: str):
     """Return text of element"""
-
+    
     return driver.find_element_by_xpath(xpath).text
 
 driver = set_up_driver(implicitly_wait)
 
-driver.get("https://coinmarketcap.com/currencies/bitcoin/")
+driver.get("https://coinmarketcap.com/")
 
-driver.refresh()
+for asset in assets_querys:
+    driver.find_element_by_xpath(
+        asset['entry_point']['xpath']).click()
+    driver.refresh()
 
-"""cokies acept"""
-driver.find_element_by_xpath(
-    querys['buttons']['xpatch']['cookie_button']).click()
+    #cookie acept 
+    driver.find_element_by_xpath(
+        asset['buttons']['xpath']['cookie_button']).click()
 
-"""show more button click"""
-show_more_button = driver.find_element_by_xpath(
-    querys['buttons']['xpatch']['show_more_button'])
-show_more_button.click()
+    #show more button click
+    driver.find_element_by_xpath(
+        asset['buttons']['xpath']['show_more_button']).click()
+
+    statistics_querys = asset['statistics']['xpath']
+    date = datetime.now().strftime("%Y-%m-%d")
+
+    data = {
+        "asset": asset['asset'],
+        "values": []
+    }
+
+    temp = {}
+    for query in statistics_querys:
+        temp[query] = float(sub(regexp,"",get_element_text_xpath(
+                            driver ,statistics_querys[query])))
+
+    data['values'].append({date: temp})
 
 
-regexp = "[^0-9\.]"
-
-statistics_querys = querys['statistics']['xpatch']
-
-date = datetime.now().strftime("%Y-%m-%d")
-
-data = {
-    "asset": "BTC",
-    "values": []
-}
-
-temp = {}
-for query in statistics_querys:
-    temp[query] = float(sub(regexp,"",get_element_text_xpath(
-                        driver ,statistics_querys[query])))
-
-data['values'].append({date: temp})
-
-print (json.dumps(data))
-
-with open('data.json', 'w') as file:
-    json.dump(data, file, indent=4)
-
+print (dumps(data, indent=4))
 driver.close()
+
+#data to json file
+with open('data.json', 'w') as file:
+    dump(data, file, indent=4)
+
